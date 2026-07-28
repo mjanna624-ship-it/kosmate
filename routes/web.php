@@ -33,7 +33,9 @@ Route::resource('notes', NoteController::class)
     ->names('notes');
 
 Route::get('/', function () {
-    return view('welcome');
+    return auth()->check()
+        ? redirect()->route('dashboard')
+        : redirect()->route('login');
 });
 
 Route::get('/dashboard', function () {
